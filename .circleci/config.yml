@@ -1,0 +1,22 @@
+version: 2.1
+defaults: &defaults
+  working_directory: /go/src/github.com/aedifex/circleci-golang-demo
+  docker:
+    - image: golang:1.8
+
+workflows:
+  test-build-deploy:
+    jobs:
+      - build
+
+jobs:
+  build:
+    <<: *defaults
+    steps:
+      - checkout
+
+      - run: make build-local
+      - run: ls
+
+      # - run: ./gURL -url http://www.httpBin.org/get -verbose
+
