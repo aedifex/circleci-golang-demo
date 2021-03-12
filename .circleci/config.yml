@@ -16,7 +16,10 @@ jobs:
       - checkout
 
       - run: make build-local
-      - run: ls
+      - run: ./app
 
-      # - run: ./gURL -url http://www.httpBin.org/get -verbose
-
+  # TODO - cross compile and build ARM exec
+  build_arm:
+    steps:
+      - checkout
+      # - run: test arm
