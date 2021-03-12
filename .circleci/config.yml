@@ -20,6 +20,7 @@ jobs:
 
   # TODO - cross compile and build ARM exec
   build_arm:
+    <<: *defaults
     steps:
       - checkout
       # - run: test arm
