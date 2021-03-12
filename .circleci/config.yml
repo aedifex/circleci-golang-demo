@@ -16,7 +16,9 @@ jobs:
       - checkout
 
       - run: make build-local
-      - run: ./app
+      - run:
+          command: ./app
+          background: true
 
   # TODO - cross compile and build ARM exec
   build_arm:
