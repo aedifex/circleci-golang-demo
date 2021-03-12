@@ -19,7 +19,7 @@ jobs:
       - run:
           command: ./app
           background: true
-      - run: curl localhost:8000/version
+      - run: curl localhost:8080/version
 
   # TODO - cross compile and build ARM exec
   build_arm:
