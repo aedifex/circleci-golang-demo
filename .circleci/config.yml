@@ -16,6 +16,7 @@ jobs:
       - checkout
 
       - run: make build-local
+      - run: go get
       - run:
           command: ./app
           background: true
