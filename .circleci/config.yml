@@ -41,6 +41,9 @@ jobs:
     steps:
       - attach_workspace:
           at: /go/src/github.com/aedifex/circleci-golang-demo
+      - run:
+          command: ./app
+          background: true
       - run: curl localhost:$PORT/runtime
 
   build-alpine-binary:
