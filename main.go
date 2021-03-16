@@ -28,7 +28,7 @@ type AppVersion struct {
 
 func (a *App) Run() {
 	a.Router = mux.NewRouter()
-	// Map our function to a handler
+	// Map our functions to a handler
 	a.Router.HandleFunc("/", HandleGet)
 	a.Router.HandleFunc("/version", HandleVersion)
 	a.Router.HandleFunc("/runtime", HandleRuntimeInfo)
@@ -44,6 +44,7 @@ func jsonIfy(element interface{}) ([]byte, error) {
 
 // Returns binary version in the form of SHA1 && compile time.
 func HandleVersion(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
 	app_version := AppVersion{Build_id: build_id, Build_time: build_time}
 	payload, _ := jsonIfy(app_version)
 	fmt.Fprintf(w, string(payload))

@@ -8,6 +8,9 @@ workflows:
   test-build-deploy:
     jobs:
       - build-default
+      - build-alpine-image:
+          requires:
+            - build-default
 
 jobs:
   build-default:
@@ -17,12 +20,25 @@ jobs:
     steps:
       - checkout
       - run: go get
+      - run: go test
       - run: make build-local
       - run:
           command: ./app
           background: true
       # TODO - turn this into script
       - run: curl localhost:$PORT/version
+      - run: curl localhost:$PORT/runtime
+      - persist_to_workspace:
+          root: /go/src/github.com/aedifex/
+          paths:
+            - circleci-golang-demo
+
+  build-alpine-image:
+    <<: *defaults
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /go/src/github.com/aedifex/circleci-golang-demo
       - run: curl localhost:$PORT/runtime
 
   build-alpine-binary:
