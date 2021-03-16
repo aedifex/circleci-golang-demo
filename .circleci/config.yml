@@ -35,6 +35,8 @@ jobs:
 
   build-alpine-image:
     <<: *defaults
+    environment:
+      PORT: 4321
     resource_class: small
     steps:
       - attach_workspace:
