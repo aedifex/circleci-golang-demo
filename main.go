@@ -11,7 +11,7 @@ import (
 	"runtime"
 )
 
-var build_id, build_time = "-1.0", "today"
+var build_id, build_time = "1234567", "117 AD"
 
 // Reference HTML templates
 var siteTemplate = template.Must(template.ParseFiles("templates/index.html"))
@@ -44,8 +44,7 @@ func jsonIfy(element interface{}) ([]byte, error) {
 
 // Returns binary version in the form of SHA1 && compile time.
 func HandleVersion(w http.ResponseWriter, r *http.Request) {
-	// app_version := map[string]string{"BuildVersion": build_id, "Build time": build_time}
-	app_version := AppVersion{Build_id: "foo", Build_time: "bar"}
+	app_version := AppVersion{Build_id: build_id, Build_time: build_time}
 	payload, _ := jsonIfy(app_version)
 	fmt.Fprintf(w, string(payload))
 }

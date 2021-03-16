@@ -12,6 +12,8 @@ workflows:
 jobs:
   build:
     <<: *defaults
+    environment:
+      PORT: 1234
     steps:
       - checkout
       - run: go get
@@ -20,7 +22,8 @@ jobs:
           command: ./app
           background: true
       # TODO - turn this into script
-      - run: curl localhost:8080/version
+      - run: curl localhost:$PORT/version
+      - run: curl localhost:$PORT/runtime
 
   build-alpine-binary:
     <<: *defaults
