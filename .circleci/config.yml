@@ -7,10 +7,10 @@ defaults: &defaults
 workflows:
   test-build-deploy:
     jobs:
-      - build-alpine-binary
+      - build-default
 
 jobs:
-  build:
+  build-default:
     <<: *defaults
     environment:
       PORT: 1234
