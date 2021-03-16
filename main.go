@@ -64,7 +64,7 @@ func main() {
 
 	a := App{}
 	a.Run()
-	log.Printf("Starting server version: %v on port: %v", build_id, port)
+	log.Printf("Starting server version: %v on port: %v", build_id[0:7], port)
 	err := http.ListenAndServe(port, a.Router)
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)

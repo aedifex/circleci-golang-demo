@@ -7,7 +7,7 @@ defaults: &defaults
 workflows:
   test-build-deploy:
     jobs:
-      - build
+      - build-alpine-binary
 
 jobs:
   build:
@@ -19,11 +19,24 @@ jobs:
       - run:
           command: ./app
           background: true
+      # TODO - turn this into script
       - run: curl localhost:8080/version
 
-  # TODO - cross compile and build ARM exec
-  build_arm:
+  build-alpine-binary:
     <<: *defaults
     steps:
       - checkout
+      - run: go get
+      - run: make build-linux
+      - run:
+          command: ./linux-app
+          background: true
+      # TODO - turn this into script
+      - run: curl localhost:8080/version
+
+  # TODO - cross compile and build ARM exec
+  # build_arm:
+  #   <<: *defaults
+  #   steps:
+  #     - checkout
       # - run: test arm
