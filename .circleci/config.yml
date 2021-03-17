@@ -31,7 +31,7 @@ jobs:
       - persist_to_workspace:
           root: /go/src/github.com/aedifex/
           paths:
-            - circleci-golang-demo
+            - circleci-golang-demo/app
 
   build-alpine-image:
     <<: *defaults
